@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jointree.trms.dao.mapper.ReservationMapper">
+
+	<sql id="getRsvListWhere">
+		<if test='srch_productName != null and srch_productName != ""'>
+			AND	a.productName LIKE CONCAT('%',#{srch_productName},'%')
+		</if>
+		<if test='srch_rsvctmName != null and srch_rsvctmName != ""'>
+			AND	a.rsvctmName LIKE CONCAT('%',#{srch_rsvctmName},'%')
+		</if>
+		<if test='srch_rsvctmTel != null and srch_rsvctmTel != ""'>
+			AND	a.rsvctmTel LIKE CONCAT('%',#{srch_rsvctmTel},'%')
+		</if>
+		<if test='srch_reservationStatus != null and srch_reservationStatus != ""'>
+			AND	a.reservationStatus LIKE CONCAT('%',#{srch_reservationStatus},'%')
+		</if>
+		<if test='srch_regTime != null and srch_regTime != ""'>
+			AND	a.regTime >= DATE_FORMAT(CONCAT(#{srch_regTime}, '000000'),'%Y%m%d%H%i%s')
+		</if>
+		<if test='srch_startDate != null and srch_startDate != ""'>
+	<![CDATA[ AND   a.startDate >= DATE_FORMAT(CONCAT(#{srch_startDate}, '000000'),'%Y%m%d%H%i%s') ]]>
+		</if>
+		<if test='srch_endDate != null and srch_endDate != ""'>
+	<![CDATA[ AND   a.endDate <= DATE_FORMAT(CONCAT(#{srch_endDate}, '235959'),'%Y%m%d%H%i%s') ]]>
+		</if>
+	</sql>
+
+	<select id="getRsvListCount" parameterType="java.util.HashMap" resultType="java.lang.Integer">
+		SELECT 	count(productName)
+		FROM	(SELECT	tp.product_name as productName,
+						trc.rsvctm_name as rsvctmName,
+						trc.rsvctm_tel as rsvctmTel,
+						trc.rsvctm_nmpr as rsvctmNmpr,
+						trc.reservation_number as reservationNumber, 
+						DATE_FORMAT(tri.start_date ,'%Y-%m-%d %H:%i') as startDate , 
+						DATE_FORMAT( tri.end_date ,'%Y-%m-%d %H:%i') as endDate, 
+						tri.reservation_status as reservationStatus,  
+						DATE_FORMAT( tri.reg_time,'%Y-%m-%d %H:%i') as regTime
+				 FROM 	tb_reservation_mapping trm,
+				 		tb_reservation_info tri,
+				 		tb_product tp,
+				 		tb_workplace tw,
+				 		tb_host th,
+				 		tb_reservation_customer trc 
+				 WHERE	th.host_id = #{userId}
+					AND th.host_seq = tw.host_seq 
+					AND tw.workplace_seq = tp.workplace_seq 
+					AND tp.product_seq = tri.product_seq 
+					AND tri.reservation_number = trm.reservation_number 
+					AND tri.reservation_number = trc.reservation_number
+				) a
+		WHERE	1=1
+		<include refid="getRsvListWhere"/>
+		
+	</select>
+
+
+
+	<!-- 예약자 등록 -->
+	<insert id="rsvctm" parameterType="java.util.HashMap">
+		INSERT INTO tb_reservation_customer(rsvctm_name, reservation_number, rsvctm_tel, rsvctm_nmpr)
+		VALUES (#{rsvctmName}, #{reservationNumber}, #{rsvctmTel}, #{rsvctmNmpr})
+	</insert>	
+
+	<!-- 예약 상품 등록 -->
+	<insert id="productRsv" parameterType="java.util.HashMap">
+		INSERT INTO tb_reservation_info(product_seq, reservation_number, start_date, end_date)
+		VALUES (#{productSeq},#{reservationNumber},#{startDate},#{endDate})
+	</insert>	
+	
+	<!-- 예약 상품, 예약자 매핑 -->
+	<insert id="rsvMapping" parameterType="java.util.HashMap">
+		INSERT INTO tb_reservation_mapping(rsvctm_seq, reservation_seq, reservation_number)
+		SELECT		trc.rsvctm_seq ,tri.reservation_seq, tri.reservation_number 
+		FROM 		tb_reservation_customer trc,tb_reservation_info tri 
+		WHERE 		trc.reservation_number = #{reservationNumber}
+			AND 	tri.reservation_number = #{reservationNumber}
+	</insert>
+	
+	<!-- 예약자 조회 -->
+	<select id="getRsvList" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		SELECT 	productName,
+				rsvctmName,
+				rsvctmTel,
+				rsvctmNmpr,
+				reservationNumber,
+				startDate,
+				endDate,
+				reservationStatus,
+				regTime
+		FROM	(SELECT	tp.product_name as productName ,
+						trc.rsvctm_name as rsvctmName,
+						trc.rsvctm_tel as rsvctmTel,
+						trc.rsvctm_nmpr as rsvctmNmpr,
+						trc.reservation_number as reservationNumber,
+						DATE_FORMAT(tri.start_date ,'%Y-%m-%d %H:%i') as startDate,
+						DATE_FORMAT( tri.end_date ,'%Y-%m-%d %H:%i') as endDate,
+						tri.reservation_status as reservationStatus,
+						DATE_FORMAT( tri.reg_time,'%Y-%m-%d %H:%i:%s') as regTime
+				FROM 	tb_reservation_mapping trm,
+						tb_reservation_info tri,
+						tb_product tp,
+						tb_workplace tw,
+						tb_host th,
+						tb_reservation_customer trc 
+				WHERE	th.host_id = #{userId}
+					AND th.host_seq = tw.host_seq 
+					AND tw.workplace_seq = tp.workplace_seq 
+					AND tp.product_seq = tri.product_seq 
+					AND tri.reservation_number = trm.reservation_number 
+					AND tri.reservation_number = trc.reservation_number) a
+		WHERE	1=1
+				<include refid="getRsvListWhere"/>
+				ORDER BY  regTime desc
+		   		LIMIT ${start} , ${length}
+			
+	</select>
+	<!--Fullcallendar 표시 위한 전체 예약자 조회 -->
+	<select id="getAllRsvList" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		SELECT	tp.product_name as productName ,
+				trc.rsvctm_name as rsvctmName,
+				trc.rsvctm_tel as rsvctmTel,
+				trc.rsvctm_nmpr as rsvctmNmpr,
+				trc.reservation_number as reservationNumber,
+				DATE_FORMAT(tri.start_date ,'%Y-%m-%d %H:%i') as startDate,
+				DATE_FORMAT( tri.end_date ,'%Y-%m-%d %H:%i') as endDate,
+				tri.reservation_status as reservationStatus,
+				DATE_FORMAT( tri.reg_time,'%Y-%m-%d %H:%i:%s') as regTime
+		FROM 	tb_reservation_mapping trm,
+				tb_reservation_info tri,
+				tb_product tp,
+				tb_workplace tw,
+				tb_host th,
+				tb_reservation_customer trc 
+		WHERE	th.host_id = #{userId}
+			AND th.host_seq = tw.host_seq 
+			AND tw.workplace_seq = tp.workplace_seq 
+			AND tp.product_seq = tri.product_seq 
+			AND tri.reservation_number = trm.reservation_number 
+			AND tri.reservation_number = trc.reservation_number
+	</select>
+	<!-- 예약자 상태 변경 -->
+	<insert id="updateRsvStatus" parameterType="java.util.HashMap">
+		UPDATE	 tb_reservation_info tri 
+		SET		 tri.reservation_status = #{reservationStatus}
+		WHERE  	 tri.reservation_number =#{reservationNumber}
+	</insert>
+	
+ </mapper>

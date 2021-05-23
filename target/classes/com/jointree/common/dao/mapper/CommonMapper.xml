@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jointree.common.dao.mapper.CommonMapper">
+	<!-- 토큰 업데이트 -->
+	<update id="updateToken" parameterType="map">
+		UPDATE 	tb_host 
+		SET 	tb_host.token = #{token}
+		WHERE 	tb_host.host_id = #{userId}
+	</update>
+	
+	<!-- 토큰을 상품시퀀스로 조회 -->	
+	<select id="lookupToken" parameterType="String" resultType="String">
+		SELECT 	th.token 
+		FROM 	tb_host th,tb_product tp ,tb_workplace tw 
+		WHERE	tp.product_seq = #{productSeq}
+			and tp.workplace_seq = tw.workplace_seq 
+			and tw.host_seq =th.host_seq 
+	</select>
+
+	<!-- 토큰을 상품시퀀스로 조회 -->	
+	<select id="idLookupToken" parameterType="String" resultType="String">
+		SELECT 	th.token 
+		FROM 	tb_host th
+		WHERE	th.host_id =#{userId}
+	</select>
+	
+	
+
+ </mapper>

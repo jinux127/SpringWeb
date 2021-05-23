@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jointree.trms.dao.mapper.WorkplaceMapper">
+
+	<resultMap type="com.jointree.trms.vo.WorkplaceVO" id="WorkplaceMap">
+		<!-- 일반 정보 -->
+		<result column="workplace_seq" property="workplaceSeq" jdbcType="VARCHAR"/>
+		<result column="workplace_name" property="workplaceName" jdbcType="VARCHAR"/>
+		<result column="workplace_tel" property="workplaceTel" jdbcType="VARCHAR"/>
+		<result column="workplace_start_time" property="workplaceStartTime" jdbcType="VARCHAR"/>
+		<result column="workplace_end_time" property="workplaceEndTime" jdbcType="VARCHAR"/>
+		<result column="workplace_status" property="workplaceStatus" jdbcType="VARCHAR"/>
+		<result column="host_seq" property="hostSeq" jdbcType="VARCHAR"/>
+		
+		<!-- 주소 정보 -->
+		<result column="zone_code" property="zoneCode" jdbcType="VARCHAR"/>
+		<result column="road_address" property="roadAddress" jdbcType="VARCHAR"/>
+		<result column="detail_address" property="detailAddress" jdbcType="VARCHAR"/>
+		
+		<!-- 계좌 정보 -->
+		<result column="bank_name" property="bankName" jdbcType="VARCHAR"/>
+		<result column="depositor_name" property="depositorName" jdbcType="VARCHAR"/>
+		<result column="account_number" property="accountNumber" jdbcType="VARCHAR"/>
+	
+	</resultMap>
+<!-- ======================사업장 목록 페이지 시작======================== -->
+	<!-- gethostSeq By hostId -->
+	<select id="getHostSeq" resultType="string">
+		SELECT
+			host_seq
+		FROM
+			tb_host
+		WHERE
+			host_id = #{hostId}
+	</select>
+	<!-- 목록 호출 -->
+	<select id="getWorkplaceList" resultMap="WorkplaceMap">
+		SELECT
+			workplace_name, date_format(workplace_start_time, '%H:%i') as workplace_start_time, date_format(workplace_end_time, '%H:%i') as workplace_end_time, workplace_status , workplace_seq
+		FROM
+			tb_workplace
+		WHERE
+			host_seq = #{hostSeq}
+	</select>
+<!-- ======================사업장 등록 페이지 시작======================== -->
+	<!-- 사업장 정보 입력 -->
+	<insert id="insertWorkplaceInfo">
+		INSERT INTO trms.tb_workplace(workplace_name, workplace_tel, workplace_start_time, workplace_end_time, host_seq)
+		VALUES(#{workplaceName}, #{workplaceTel}, #{workplaceStartTime}, #{workplaceEndTime}, #{hostSeq});
+	</insert>
+	<!-- workplaceSeq 반환 -->
+	<select id="getWorkplaceSeq" resultType="string">
+		SELECT
+			workplace_seq
+		FROM
+			trms.tb_workplace
+		WHERE
+			workplace_name = #{workplaceName}
+		AND
+			workplace_tel = #{workplaceTel}
+		AND
+			workplace_start_time = #{workplaceStartTime}
+		AND
+			workplace_end_time = #{workplaceEndTime}
+		AND
+			host_seq = #{hostSeq}
+	</select>
+	<!-- accountseq 반환 -->
+	<select id="getAccountSeq" resultType="string">	
+		SELECT	tai.account_seq
+		FROM	tb_account_info tai
+		WHERE	tai.host_id = #{hostId}
+		AND		tai.bank_name = #{bankName}
+		AND		tai.depositor_name = #{depositorName}
+		AND		tai.account_number = #{accountNumber}
+	</select>
+	<!-- 계좌 정보 입력 -->
+	<insert id="insertAccountInfo">
+		INSERT INTO trms.tb_account_info(bank_name, depositor_name, account_number, host_id)
+		VALUES(#{bankName}, #{depositorName}, #{accountNumber}, #{hostId});
+	</insert>
+	<!-- 계좌 매핑 -->
+	<insert id="accountMapping">
+		INSERT INTO tb_account_mapping(account_seq,workplace_seq)
+		VALUES		(#{accountSeq}, #{workplaceSeq})
+	</insert>
+	<!-- 사업장 주소 정보 입력 -->
+	<insert id="insertAddressInfo">
+		INSERT INTO trms.tb_address_info(zone_code, road_address, detail_address, workplace_seq)
+		VALUES(#{zoneCode}, #{roadAddress}, #{detailAddress}, #{workplaceSeq});
+	</insert>
+<!-- ======================사업장 상세 페이지 시작======================== -->
+	<!-- 사업장 상세 정보 호출 -->
+	<select id="getWorkplaceInfo" resultMap="WorkplaceMap">
+		SELECT
+			A.workplace_seq, A.workplace_name, A.workplace_tel, A.workplace_status, date_format(A.workplace_start_time, '%H:%i') as workplace_start_time, date_format(A.workplace_end_time, '%H:%i') as workplace_end_time,
+			B.zone_code, B.road_address, B.detail_address,
+			C.bank_name, C.depositor_name, C.account_number 
+		FROM
+			tb_workplace A, tb_address_info B, tb_account_info C, tb_account_mapping D
+		WHERE
+			A.workplace_seq = #{workplaceSeq}
+		AND
+			B.workplace_seq = #{workplaceSeq}
+		AND
+			D.workplace_seq = #{workplaceSeq}
+		AND
+			D.account_seq = C.account_seq
+	</select>
+	<!-- 사업장 상세 정보 업데이트 -->
+	<update id="setWorkplaceInfo">
+		UPDATE
+			tb_workplace A,
+			tb_address_info B,
+			tb_account_mapping C
+		SET 
+			A.workplace_name = #{workplaceName}, A.workplace_tel = #{workplaceTel}, A.workplace_start_time = #{workplaceStartTime}, A.workplace_end_time = #{workplaceEndTime}, A.workplace_status = #{workplaceStatus},
+			B.zone_code = #{zoneCode}, B.road_address = #{roadAddress}, B.detail_address = #{detailAddress},
+			C.account_seq = #{accountSeq}
+		WHERE 
+			A.workplace_seq = #{workplaceSeq}
+		AND
+			B.workplace_seq = #{workplaceSeq}
+		AND
+			C.workplace_seq = #{workplaceSeq}
+	</update>
+	<!-- 사업장 삭제 -->
+	<delete id="delWorkplace">
+		DELETE FROM trms.tb_workplace
+		WHERE workplace_seq = #{workplaceSeq};
+	</delete>
+<!-- ======================공용======================== -->
+	<!-- 은행 리스트 -->
+	<select id="getBank" resultType="Map">
+		SELECT bank FROM tb_bank;
+	</select>
+</mapper>

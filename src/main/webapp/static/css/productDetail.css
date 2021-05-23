@@ -1,0 +1,70 @@
+@charset "UTF-8";
+/* 모바일 화면용 CSS */
+	table {
+		width: 100%;
+		text-align:center;
+	}
+	th{
+		width: 30%;
+	}
+	td{	
+		width: 70%;
+	}
+	textarea.form-control{
+		height: 150px;
+	}
+	/* 버튼 가운데 정렬 */
+	#BTNDIV{
+		text-align: center;
+	}
+	/* 각 버튼 크기 조절 */
+	#ModBTN, #DelBTN, #ModFinishBTN{
+		width: 40%;
+	}
+	#ModFinishBTN{
+		display: none;
+	}
+
+	/* input type=number의 화살표 제거 */
+	input[type="number"]::-webkit-outer-spin-button,
+	input[type="number"]::-webkit-inner-spin-button {
+	    -webkit-appearance: none;
+	    margin: 0;
+	}
+/* pc 큰 화면 */
+@media ( min-width :1024px) {
+	#Basic, #Time{
+	    float: left;
+	    width: 41%;
+	    height : 250px;
+	    margin-top: 2%;
+	    margin-left: 6%;
+	}
+	#Introduce{
+		clear: both;
+		width: 88%;
+		height : 450px;
+		margin-left: 6%;
+	}
+	table {
+		width: 100%;
+		margin-top: 5%;
+	}
+	textarea.form-control{
+		height: 300px;
+	}
+	/* 각 버튼 크기 조절 */
+	#ModBTN, #DelBTN, #ModFinishBTN{
+		width: 30%;
+		font-size: 150%;
+	}
+	#ModFinishBTN{
+		display: none;
+	}
+	/* input type=number의 화살표 제거 */
+	input[type="number"]::-webkit-outer-spin-button,
+	input[type="number"]::-webkit-inner-spin-button {
+	    -webkit-appearance: none;
+	    margin: 0;
+	}
+}

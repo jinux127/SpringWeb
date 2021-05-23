@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jointree.trms.dao.mapper.ProductMapper">
+
+	<resultMap type="com.jointree.trms.vo.ProductVO" id="ProductMap">
+		<result column="product_seq" property="productSeq" jdbcType="VARCHAR"/>
+		<result column="product_name" property="productName" jdbcType="VARCHAR"/>
+		<result column="product_status" property="productStatus" jdbcType="VARCHAR"/>
+		<result column="price" property="price" jdbcType="VARCHAR"/>
+		<result column="max_number_person" property="maxNumberPerson" jdbcType="VARCHAR"/>
+		<result column="product_info" property="productInfo" jdbcType="VARCHAR"/>
+		<result column="business_start_time" property="businessStartTime" jdbcType="VARCHAR"/>
+		<result column="business_end_time" property="businessEndTime" jdbcType="VARCHAR"/>
+		<result column="unit_time" property="unitTime" jdbcType="VARCHAR"/>
+		<result column="workplace_seq" property="workplaceSeq" jdbcType="VARCHAR"/>
+	</resultMap>
+	
+	<!-- 상품 목록 호출 -->
+	<select id="getProductList" resultMap="ProductMap">
+		SELECT
+			product_seq, product_name, product_status, price, workplace_seq
+		FROM
+			trms.tb_product
+		WHERE
+			workplace_seq = #{workplaceSeq};
+	</select>
+	<!-- 상품 등록 -->
+	<insert id="insertProduct">
+		INSERT INTO trms.tb_product
+			(product_name, price, max_number_person, product_info, business_start_time, business_end_time, unit_time, workplace_seq)
+		VALUES(#{productName}, #{price}, #{maxNumberPerson}, #{productInfo}, #{businessStartTime}, #{businessEndTime}, #{unitTime}, #{workplaceSeq});
+	</insert>
+	<!-- 상품 상세 정보 호출 -->
+	<select id="getProductInfo" resultMap="ProductMap">
+		SELECT	product_seq, product_name, product_status, price, max_number_person, product_info, business_start_time, business_end_time, unit_time, workplace_seq
+		FROM 	tb_product
+		WHERE	product_seq = ${productSeq};
+	</select>
+	<!-- 상품 수정 -->
+	<update id="setProductInfo">
+		UPDATE
+			trms.tb_product
+		SET
+			product_name=#{productName}, product_status=#{productStatus}, price=#{price}, max_number_person=#{maxNumberPerson}, product_info=#{productInfo}, business_start_time=#{businessStartTime}, business_end_time=#{businessEndTime}, unit_time=#{unitTime}
+		WHERE
+			product_seq=#{productSeq};
+	</update>
+	<!-- 상품 삭제 -->
+	<delete id="delProduct">
+		DELETE FROM
+			trms.tb_product
+		WHERE
+			product_seq = #{productSeq}
+	</delete>
+</mapper>

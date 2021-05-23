@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jointree.trms.dao.mapper.HostMapper">
+	<resultMap type="com.jointree.trms.vo.HostVO" id="BaseResultMap">
+		<result column="host_seq" property="hostSeq" jdbcType="VARCHAR" />
+		<result column="host_name" property="hostName" jdbcType="VARCHAR" />
+		<result column="host_tel" property="roleId" jdbcType="VARCHAR" />
+		<result column="host_status" property="hostStatus" jdbcType="VARCHAR" />
+		<result column="token" property="token" jdbcType="VARCHAR" />
+		<result column="failure_cnt" property="failureCnt" jdbcType="VARCHAR" />
+	</resultMap>
+	<!-- 호스트 상세정보 조회 -->
+	<select id="getHostInfo" resultMap="BaseResultMap" parameterType="String">
+		SELECT 		host_seq, host_id, host_password, host_name, host_tel, host_status, token, failure_cnt
+		FROM 		tb_host
+		WHERE 		host_id = #{userId}
+	</select>
+	
+	<!-- 호스트 상세정보 입력 (미구현)-->
+	<insert id="setHostInfo">
+		INSERT INTO 	tb_host(host_name, host_tel, host_status, token, "failure_cnt")
+		VALUES 			(#{host_name}, #{host_tel}, #{host_status}, #{token}, #{failure_cnt})
+	</insert>
+	
+	
+	<!-- 예약 상태 변경 -->
+	<update id="updateRsvStatus" parameterType="java.util.HashMap">
+		UPDATE 	tb_reservation_info tri 
+		SET		tri.reservation_status = #{reservationStatus}
+		WHERE  	tri.reservation_number =#{reservationNumber}
+	</update>
+	
+</mapper>

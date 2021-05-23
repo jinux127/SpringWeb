@@ -1,0 +1,47 @@
+@charset "UTF-8";
+/* 모바일 화면용 CSS */
+	h1{
+		text-align: center;
+	}
+	#all{
+		margin-top: 5%;
+		background-color : white;
+		width: 100%;
+		padding: 50px;
+	}
+	#accountList{
+		height: 420px;
+		overflow: auto;
+	}
+	.callout.callout-info{
+		border-left-color : #007bff;
+	}
+	
+@media ( min-width :601px) {
+	#all{
+		width: 500px;
+		min-height : 600px;
+		margin : 50px auto;
+		padding: 50px;
+		border: 2px solid #007bff;
+		border-radius: 25px;
+	}
+}
+/* pc 큰 화면 */
+@media ( min-width :1024px) {
+	#all{
+		width: 1000px;
+		min-height : 600px;
+		padding: 50px;
+	}
+	.left{
+		float : left;
+		width: 47%;
+		margin-left: 2%;
+	}
+	.right{
+		float : right;
+		width: 47%;
+		margin-right: 2%;
+	}
+}

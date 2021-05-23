@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jointree.wifi.dao.mapper.WifiCheckMapper">
+
+	<select id="selectWifi_1" parameterType="String" resultType="HashMap">
+		SELECT
+			TARGET_TEL,
+			ROOM_NAME,
+			BSSID,
+			ROUND(LEVEL,2) AS LEVEL
+		FROM 
+			TB_WIFI_LIST
+		WHERE 
+			COUNT = 0
+		AND TARGET_TEL = #{targetName}
+		AND ROOM_NAME = #{roomName}			
+	</select>
+	
+	<insert id="insertWifiSet">
+		INSERT INTO
+			TB_WIFI_LIST
+				(
+					TARGET_TEL,
+					ROOM_NAME,
+					BSSID,
+					SSID,
+					LEVEL,
+					REGDATE,
+					COUNT
+				)
+		SELECT
+			TARGET_TEL,
+			ROOM_NAME,
+			BSSID,
+			SSID,
+			SUM(LEVEL)/COUNT(*),
+			NOW() AS REGDATE,
+		    '0' AS COUNT
+		FROM 
+			TB_WIFI_LIST
+		GROUP BY 
+			TARGET_TEL, ROOM_NAME, BSSID
+		HAVING 
+			COUNT(*) >= 3
+	</insert>
+	
+	<delete id="deleteWifiSet" parameterType="String">
+		DELETE FROM 
+			TB_WIFI_LIST
+		WHERE 
+			TARGET_TEL = #{targetName}
+		AND
+			ROOM_NAME = #{roomName}
+		AND 
+			COUNT != 0
+	</delete>
+	
+	<select id="selectRoom" parameterType="String" resultType="HashMap">
+		SELECT DISTINCT
+			ROOM_NAME
+		FROM 
+			TB_WIFI_LIST
+		WHERE 
+			TARGET_TEL = #{targetName}
+		ORDER BY ROOM_NAME
+	</select>
+
+</mapper>

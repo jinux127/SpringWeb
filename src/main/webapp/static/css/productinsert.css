@@ -1,0 +1,61 @@
+@charset "UTF-8";
+/* 모바일 화면용 CSS */
+	table {
+		width: 100%;
+	}
+	th{
+		text-align:center;
+		width: 30%;
+	}
+	td{	
+		width: 70%;
+	}
+	textarea.form-control{
+		height: 150px;
+	}
+	/* input type=number의 화살표 제거 */
+	input[type="number"]::-webkit-outer-spin-button,
+	input[type="number"]::-webkit-inner-spin-button {
+	    -webkit-appearance: none;
+	    margin: 0;
+	}
+	#GoBack{
+		text-align: center;
+	}
+	#Regist{
+		width: 80%;
+	}
+
+/* pc 큰 화면 */
+@media ( min-width :1024px) {
+	#Basic, #Time{
+	    float: left;
+	    width: 41%;
+	    height : 250px;
+	    margin-top: 2%;
+	    margin-left: 6%;
+	}
+	#Introduce{
+		clear: both;
+		width: 88%;
+		height : 450px;
+		margin-left: 6%;
+	}
+	table {
+		width: 100%;
+		margin-top: 5%;
+	}
+	textarea.form-control{
+		height: 300px;
+	}
+	/* input type=number의 화살표 제거 */
+	input[type="number"]::-webkit-outer-spin-button,
+	input[type="number"]::-webkit-inner-spin-button {
+	    -webkit-appearance: none;
+	    margin: 0;
+	}
+	#Regist{
+		width: 30%;
+		font-size: 150%;
+	}
+}

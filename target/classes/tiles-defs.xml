@@ -1,0 +1,25 @@
+<!DOCTYPE tiles-definitions PUBLIC
+    "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN"
+    "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+
+<tiles-definitions>
+
+	<definition name="basic" template="/layouts/basic.jsp">
+		<put-attribute name="content" value="" />
+		<put-attribute name="script" value="" />
+	</definition>
+	
+	<definition name="basic2" template="/layouts/basic2.jsp">
+		<put-attribute name="content" value="" />
+		<put-attribute name="script" value="" />
+	</definition>
+	<!-- Implement Definition -->
+	<definition name="*.tiles" extends="basic">
+		<put-attribute name="content" value="/tiles/{1}/{1}.jsp" />
+		<put-attribute name="script" value="/tiles/{1}/{1}_script.jsp" />
+	</definition>
+	<definition name="*.basic2" extends="basic2">
+		<put-attribute name="content" value="/tiles/{1}/{1}.jsp" />
+		<put-attribute name="script" value="/tiles/{1}/{1}_script.jsp" />
+	</definition>
+</tiles-definitions>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jointree.wifi.dao.mapper.WifiMapper">
+
+	<!-- 와이파이 업데이트 아이디를 생성하면 기본값으로 공백을 입력해줘 업데이트하는 형식으로 이용할 생각, 지금은 테스트 용도로 insert -->
+	<insert id="updateWifiLevel" parameterType="java.util.HashMap">
+		INSERT INTO tb_wifi_list(ssid,bssid,level,room_name,target_tel,count)
+		VALUES		(#{SSID},#{BSSID},#{level},#{roomName},#{targetTel},#{count})
+	</insert>
+
+	<select id="countWifiList" parameterType="java.util.HashMap" resultType="_int">
+		SELECT	count(twl.ssid) as count
+		FROM	tb_wifi_list twl 
+		WHERE	bssid =#{BSSID}
+			AND	twl.target_tel = #{targetTel}
+	</select>
+	
+	<select id="selectNearRoom" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		SELECT	twl.bssid ,twl.`level`, abs(twl.`level`-#{level}) as "거리" ,twl.room_name as roomName,#{level} as currentLevel
+		FROM	tb_wifi_list twl 
+		WHERE	bssid =#{BSSID}
+			AND	twl.target_tel = #{targetTel}
+		ORDER BY 거리 asc
+		LIMIT 1;
+	</select>
+	
+	<select id="selectWifiListJson" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		SELECT 	room_name, CONCAT("{",group_concat(CONCAT(CONCAT(CONCAT("\"",bssid),"\": \""),CONCAT(`level`,"\""))),"}") as jsonValue
+		FROM 	trms.tb_wifi_list
+		WHERE 	target_tel = #{targetTel}
+		GROUP BY room_name;
+	</select>
+	
+</mapper>

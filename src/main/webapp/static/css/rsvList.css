@@ -1,0 +1,37 @@
+@charset "UTF-8";
+
+
+/* 모바일 화면용 CSS */
+	#calendar{
+		width: 90%;
+		margin:auto;
+	}
+	#divRsvList{
+		margin:100px auto;
+		width: 90%;
+	}
+
+
+@media (min-width:1025px){
+	
+	#aa{
+		margin: 100px 100px 100px 100px;
+	}
+	#calendar{
+		float:left;
+		width: 40%;
+	}
+	#divRsvList{
+		margin: auto;
+		float:right;
+		width: 50%;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+}

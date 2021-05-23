@@ -1,0 +1,139 @@
+/* @charset "UTF-8"; */
+/* 모바일 화면용 CSS */
+	html, body {
+        margin: 0px;
+        height: 100%;
+    }
+    html, body, div, form, table, tr, th, td, input, button, select {
+        box-sizing: border-box;
+        padding: 0px;
+		font-size: 15px;
+    }
+    table {
+        border-spacing: 0px;
+    }
+    /* 헤더 설정 */
+    div.header {
+    	position:fixed;
+    	width: 100%;
+    	top:0;
+    	left: 0;
+    	background-color: #fff;
+    }
+	/* 로고 이미지 */
+	.titleImg{
+		width:55%;
+	}
+    /* 위 아래 여백  */
+    div.padding.top{
+    	height: 6%;
+    }
+    div.padding.bottom{
+    	height: 10%;
+    }
+    /* 본문 */
+    div.content {
+        width: 90%;
+        margin: 15% auto; 
+    }
+	/* 하단메뉴 css*/
+	.floatingMenu {
+		background: #f9fafe;
+		color: #fff;
+		height: 100px;
+	}
+	.floatingMenu li {
+		width: 25%;
+	}
+	.floatingMenu {
+		background: #f9fafe;
+		color: #fff;
+		height: 100px;
+	}
+	.fixBotNav {
+		position: fixed;
+		left: 0px;
+		right: 0px;
+		bottom: 0px;
+		z-index: 100;
+		height: 7%;
+		transition: all 0.4s linear;
+		display: block;
+	}
+	#floatingWrap {
+		display: block;
+		width: 100%;
+	}
+	ul {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		text-align: center;
+	}
+	li {
+		margin: 0 0 0 0;
+		padding: 0 0 0 0;
+		border: 0;
+		float: left;
+		display: inline-block;
+	}
+	li.menu-icon {
+ 		margin-top: 1%;
+	}
+	/* 	아이폰용 css */
+	/* // iOS 11.0 버전 */
+	constant(safe-area-inset-top)
+	constant(safe-area-inset-right)
+	constant(safe-area-inset-bottom)
+	constant(safe-area-inset-left)
+	/* // iOS 11.2 이상 */
+	env(safe-area-inset-top)
+	env(safe-area-inset-right)
+	env(safe-area-inset-bottom)
+	env(safe-area-inset-left)
+	/* 웹킷에서 발생되는 음영 지우기, 드레그 비활성화	 */
+	* {
+	  -webkit-touch-callout: none; /* 링크 추출 금지 */
+	  -webkit-tap-highlight-color:rgba(255,255,255,0);
+	  user-select: none;
+	}
+/* pc 큰 화면 */
+@media ( min-width :1024px) {
+/* 기본 css 설정 */
+    html, body {
+        margin: 0px;
+        height: 100%;
+    }
+/*     body{ */
+/*     	background-color: #F5F5F5; */
+/*     } */
+    html, body, div, form, table, tr, th, td, input, button, select {
+        box-sizing: border-box;
+        padding: 0px;
+		font-size: 15px;
+    }
+    
+    table {
+        border-spacing: 0px;
+    }
+	/* 로고 이미지 */
+	.titleImg{
+		width:30%;
+	}
+    /* 위 아래 여백  */
+    div.padding.top{
+    	height: 12%;
+    }
+    div.padding.bottom{
+    	display: none;
+    }
+    /* 본문 */
+    div.content {
+    	margin-top : 10%;
+        width: 100%;
+    }
+    /* pc 화면에서 하부 Nav가 보이지 않도록 */
+    #floatingWrap{
+    	display: none;
+    }
+}

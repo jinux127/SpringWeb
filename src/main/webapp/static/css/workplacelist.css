@@ -1,0 +1,59 @@
+@charset "UTF-8";
+/* 모바일 화면용 CSS */
+	/* 타이틀 div */
+	#subjectDIV {
+		text-align: center;
+	}
+	/* 버튼 */
+	#To_Detail, #To_List{
+		float : left;
+		width : 46%;
+		margin : 2%;
+	}
+	/* 하부 nav바 */
+	.bottomNav {
+		position: fixed;
+		left: 0;
+		bottom: 0;
+		width: 100%;
+		height: 11%;
+		line-height: 52px;
+		color: #fff;
+		text-align: center;
+		background-color: #fff;
+	}
+	/* 등록 페이지 버튼 Div */
+	div#worlplaceInsert{
+		text-align: center;
+	}
+	/* 등록 버튼 */
+	.To_Regist {
+		width: 90%;
+	}
+	.alert{
+		margin : 15% auto;
+		width: 80%;
+		text-align: center;
+	}
+/* pc 큰 화면 */
+@media ( min-width :1024px) {
+	/* 사업장 목록 카드 형식으로 좌우로 배열 */
+	.card{
+		float: left;
+		width: 41%;
+		margin-top : 2%;
+		margin-left : 6%;
+	}
+	/* 등록 페이지 버튼 Div */
+	div#worlplaceInsert{
+		clear : both;
+		text-align: center;
+	}
+	/* 등록 버튼 */
+	.To_Regist {
+		width: 30%;
+		font-size: 150%;
+		margin-bottom: 1%;
+	}
+	
+}

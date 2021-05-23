@@ -1,0 +1,98 @@
+@charset "UTF-8";
+/* 모바일 화면용 CSS */
+	#workplaceDetail{
+		text-align: center;
+	}
+	#accountList{
+		height: 244px;
+		overflow: auto;
+	}
+	table{
+		width: 100%;
+	}
+	/* 수정, 삭제 버튼 */
+	#ModBTN, #DelBTN, #ModFinishBTN{
+		width: 40%;
+	}
+	
+	/* 수정 완료 버튼 */
+	#ModFinishBTN{
+		display: none;
+	}
+	/* 다음 주소 api */
+	#btnFoldWrap{
+		cursor:pointer;
+		position:absolute;
+		right:0px;
+		top:-1px;
+		z-index:1;
+	}
+	#wrap{
+		display:none;
+		border:1px solid;
+		width:100%;
+		height:300px;
+		margin:5px auto;
+		position:relative;
+	}
+	/* 우편번호 검색 버튼 */
+	.addrselbtn{
+		width: 100%;
+	}
+	/* input type=number의 화살표 제거 */
+	input[type="number"]::-webkit-outer-spin-button,
+	input[type="number"]::-webkit-inner-spin-button {
+	    -webkit-appearance: none;
+	    margin: 0;
+	}
+/* pc 큰 화면 */
+@media ( min-width :1024px) {
+	#BaseDIV, #AccountDIV{
+		float : left;
+		width: 41%;
+		height : 300px;
+		margin-top: 2%;
+		margin-left: 6%;
+	}
+	#AddressDIV{
+		clear: both;
+		margin-left: 6%;
+		width: 88%;
+		height: 300px;
+	}
+	table{
+		width: 100%;
+		margin-top: 5%;
+	}
+	/* 수정, 삭제 버튼 */
+	#ModBTN, #DelBTN, #ModFinishBTN{
+		width: 30%;
+		font-size: 150%;
+	}
+	/* 수정 완료 버튼 */
+	#ModFinishBTN{
+		display: none;
+	}
+	/* 다음 주소 api */
+	#btnFoldWrap{
+		cursor:pointer;
+		position:absolute;
+		right:0px;
+		top:-1px;
+		z-index:1;
+	}
+	#wrap{
+		display:none;
+		border:1px solid;
+		width:100%;
+		height:300px;
+		margin:5px auto;
+		position:relative;
+	}
+	/* input type=number의 화살표 제거 */
+	input[type="number"]::-webkit-outer-spin-button,
+	input[type="number"]::-webkit-inner-spin-button {
+	    -webkit-appearance: none;
+	    margin: 0;
+	}
+}

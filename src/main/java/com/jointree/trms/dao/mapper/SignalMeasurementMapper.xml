@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jointree.trms.dao.mapper.SignalMeasurementMapper">
+	<select id="getMeasureInfo" parameterType="com.jointree.trms.vo.SearchVO" resultType="Map">
+		SELECT 
+			wifi_bssid
+			, wifi_level
+		FROM tb_testwifiinsert 
+		WHERE reg_date = 
+			(SELECT reg_date
+			FROM tb_testwifiinsert
+			WHERE target_tel = #{id}
+			ORDER BY reg_date DESC
+			LIMIT 1) 
+		AND target_tel = #{id}
+	</select>
+	
+	
+	<select id="getRoomCount" parameterType="com.jointree.trms.vo.SearchVO" resultType="int">
+		SELECT COUNT(DISTINCT room_name)
+		FROM tb_wifi_list
+		WHERE target_tel = #{id}
+	</select>
+	
+	<select id="getSaveInfo" parameterType="com.jointree.trms.vo.SearchVO" resultType="Map">
+		SELECT 
+			substring(room_name,1,1) as room_name
+			, level
+			, bssid
+		FROM tb_wifi_list
+		WHERE target_tel=#{id}
+		AND room_name=#{roomNo}
+	</select>
+	
+	<update id="setStatus" parameterType="com.jointree.trms.vo.SearchVO">
+		UPDATE 
+			tb_target_person
+		SET
+			target_leave = #{status}
+			,target_location = #{roomNo}
+			,rct_date = #{recentDt}
+		WHERE 
+			target_tel = #{id}
+	</update>
+	
+	<select id="statusList" resultType="Map">
+		SELECT 
+			target_name
+			, target_tel
+			, target_leave
+			, host_seq
+			, target_location
+			, rct_date
+		FROM tb_target_person
+	</select>
+	
+	<select id="getRecentDt" parameterType="com.jointree.trms.vo.SearchVO" resultType="String">
+		SELECT
+			reg_date
+		FROM 
+			tb_testwifiinsert
+		WHERE
+			target_tel=#{id}
+		ORDER BY 
+			reg_date DESC
+		LIMIT 1
+	</select>
+	
+	<insert id="mrmtLog" parameterType="com.jointree.trms.vo.MrmtInsertVO">
+		INSERT INTO tb_mrmt_log(
+			target_tel
+			, real_room
+			, mrmt_room
+			, mrmt_acc
+			, set_acc
+			, add_level
+			, reg_date
+		)
+		VALUES(
+			#{id}
+			, #{realRoom}
+			, #{mrmtRoom}
+			, #{mrmtAcc}
+			, #{setAcc}
+			, #{addLevel}
+			, #{regDate}
+		)
+	</insert>
+</mapper>
