@@ -18,6 +18,7 @@
 	<security:http pattern="/layouts/**" security="none" />
 	<security:http pattern="/wifi/**" security="none" />
 	<security:http pattern="/map/**" security="none" />
+	<security:http pattern="/responsive/**" security="none" />
 	
 	<security:http auto-config="true" use-expressions="true">
 		<!-- url 접근 설정 -->

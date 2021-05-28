@@ -90,7 +90,7 @@
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <!-- inputmask (전화번호 자동입력)-->
 <script src="/static/plugins/inputmask/jquery.inputmask.bundle.js"></script>
-<!-- <!-- datepicker --> -->
+<!-- datepicker -->
 <!-- <script src="/static/plugins/datetimepicker/jquery.datetimepicker.full.js"></script> -->
 
 <tiles:insertAttribute name="script" />
@@ -101,53 +101,5 @@
     
 </body>
 
-
-
-
-<!-- <footer> -->
-<!-- 	<div id="floatingWrap" class="fixBotNav verM" > -->
-<!-- 		<nav class="floatingMenu" style="height: 110px;"> -->
-<!-- 			<ul> -->
-<!-- 				메인 이동 -->
-<!-- 				<li class="menu-icon"> -->
-<!-- 					<a href="/">  -->
-<!-- 						<span> -->
-<!-- 							<img src="/static/img/icon/home-7.png" alt="홈" style="width:25%;"> -->
-<!-- 						</span> -->
-<!-- 					</a> -->
-<!-- 				</li> -->
-				
-<!-- 				사업장 목록 이동 -->
-<!-- 				<li class="menu-icon"> -->
-<!-- 					<a href="/workplace/list"> -->
-<!-- 						<span> -->
-<!-- 							<img src="/static/img/icon/list.png" alt="홈" style="width:25%;"> -->
-<!-- 						</span> -->
-<!-- 					</a> -->
-<!-- 				</li> -->
-				
-<!-- 				예약 리스트 -->
-<!-- 				<li class="menu-icon"> -->
-<!-- 					<a href="/"> -->
-<!-- 						<span> -->
-<!-- 							<img src="/static/img/icon/list2.png" alt="홈" style="width:25%;"> -->
-<!-- 						</span> -->
-<!-- 					</a> -->
-<!-- 				</li> -->
-				
-<!-- 				마이페이지 -->
-<!-- 				<li class="menu-icon"> -->
-<!-- 					<a href="/"> -->
-<!-- 						<span> -->
-<!-- 							<img src="/static/img/icon/mypage.png" alt="홈" style="width:25%;"> -->
-<!-- 						</span> -->
-<!-- 					</a> -->
-<!-- 				</li> -->
-<!-- 			</ul> -->
-<!-- 		</nav> -->
-<!-- 	</div> -->
-
-
-<!-- </footer> -->
 
 </html>

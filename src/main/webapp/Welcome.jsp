@@ -22,8 +22,9 @@
 		<div>
 			<button type="button" class="btn btn-block btn-outline-info btn-lg" onclick="location.href='/home'">HOME</button>
 			<button type="button" class="btn btn-block btn-outline-info btn-lg" onclick="location.href='/workplace/list'">사업장 목록 페이지</button>
-      <button type="button" class="btn btn-block btn-outline-info btn-lg" onclick="location.href='/host/mypage'">마이페이지</button>
+      		<button type="button" class="btn btn-block btn-outline-info btn-lg" onclick="location.href='/host/mypage'">마이페이지</button>
 			<button type="button" class="btn btn-block btn-outline-info btn-lg" onclick="wifiScan()">위치 등록</button>
+			<button type="button" class="btn btn-block btn-outline-info btn-lg" onclick="location.href='/responsive/main'">반응형 웹</button>
 			<button type="button" class="btn btn-block btn-outline-info btn-lg" onclick="bluetooth()">블루투스</button>
 			<button type="button" class="btn btn-block btn-outline-info btn-lg" onclick="jwTest()">테스트</button>
 			<button type="button" class="btn btn-block btn-outline-info btn-lg" onclick="location.href='/map/mapTest'">맵 테스트</button>
