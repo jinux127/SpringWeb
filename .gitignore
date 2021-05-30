@@ -1,0 +1,10 @@
+
+src/main/webapp/META-INF/maven/com.jointree/trms/pom.properties
+
+src/main/webapp/META-INF/MANIFEST.MF
+
+src/main/webapp/resources/fcm/
+
+src/main/resources/context.dev.properties
+
+target/classes/context.dev.properties
