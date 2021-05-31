@@ -10,58 +10,17 @@
 </head>
 <body>
 
-<p>연습중!</p>
-<p>연습중!</p>
-<p>연습중!</p>
-<p>연습중!</p>
-<p>연습중!</p>
-<p>연습중!</p>
-<p>연습중!</p>
-<p>연습중!</p>
-<p>연습중!</p>
-<p>연습중!</p>
-<p>연습중!</p>
-<p>연습중!</p>
-<p>연습중!</p>
-<p>연습중!</p>
-<p>연습중!</p>
-<p>연습중!</p>
-<p>연습중!</p>
-<p>연습중!</p>
-<p>연습중!</p>
-<p>연습중!</p>
-<p>연습중!</p>
-<p>연습중!</p>
-<p>연습중!</p>
-<p>연습중!</p>
-<p>연습중!</p>
-<p>연습중!</p>
-<p>연습중!</p>
-<p>연습중!</p>
-<p>연습중!</p>
-<p>연습중!</p>
-<p>연습중!</p>
-<p>연습중!</p>
-<p>연습중!</p>
-<p>연습중!</p>
-<p>연습중!</p>
-<p>연습중!</p>
-<p>연습중!</p>
-<p>연습중!</p>
-<p>연습중!</p>
-<p>연습중!</p>
-<p>연습중!</p>
-<p>연습중!</p>
-<p>연습중!</p>
-<p>연습중!</p>
-<p>연습중!</p>
-<p>연습중!</p>
-<p>연습중!</p>
-<p>연습중!</p>
-<p>연습중!</p>
-<p>연습중!</p>
-<p>연습중!</p>
-
+	<form id="boardList">
+		<table id="boardTable" class="table table-bordered table-hover text-center">
+			<thead>
+				<tr>
+					<th style="width: 200px; text-align: center;">번호</th>
+					<th style="width: 200px; text-align: center;">제목</th>
+				</tr>
+			</thead>
+			<tbody style="text-align: center;"></tbody>
+		</table>
+	</form>
 
 </body>
 </html>

@@ -3,4 +3,36 @@
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 <script>
 
+$(document).ready(function(){
+	getAllList();
+});
+
+
+function getAllList(){
+	$.ajax({
+	    type : "POST",
+	    url : "/responsive/getAllList.do",
+	    datatype : "json",
+	    success : function(data){
+	    	console.log(data);
+			var body = $("#boardTable > tbody");
+			body.empty;
+			var bodyHtml = "";
+			
+			$.each(data.data,function(index,val){
+				bodyHtml += "<tr>"+
+								"<td>" + val.no + "</td>" +
+								"<td>" + val.title + "</td>" +
+							"</tr>";								
+			});
+			
+			body.append(bodyHtml);
+	    }, error : function(xhr, status, e) {
+	        alert('Error');
+	    }
+	});
+	
+}
+
+
 </script>
