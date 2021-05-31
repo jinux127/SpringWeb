@@ -14,11 +14,7 @@ function getAllList(){
 	    url : "/responsive/getAllList.do",
 	    datatype : "json",
 	    success : function(data){
-	    	$.each(data.List, function(index,val){
-	    		console.log(val.no);
-	    		console.log(val.title);
-	    		console.log(val.content);
-	    	});
+	    	console.log(data);
 	    }, error : function(xhr, status, e) {
 	        alert('Error');
 	    }

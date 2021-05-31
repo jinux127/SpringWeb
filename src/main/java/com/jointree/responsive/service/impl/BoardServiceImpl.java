@@ -23,7 +23,7 @@ public class BoardServiceImpl implements BoardService{
 	public Map<String, Object> getAllList() throws Exception {
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 
-		resultMap.put("data", resultMap);
+		resultMap.put("data", boardMapper.getAllList());
 		
 		
 		return resultMap;
