@@ -27,6 +27,13 @@ public class ResponsiveController {
 		return mv;
 	}
 
+	@RequestMapping(value = "/andoridMain")
+	public ModelAndView androidMain() {
+		ModelAndView mv = new ModelAndView("jsonView");
+		mv.setViewName("androidMain.responsive");
+		return mv;
+	}
+
 	
 	/* 2021.05.30 수정
 	 * 게시판 전체 조
