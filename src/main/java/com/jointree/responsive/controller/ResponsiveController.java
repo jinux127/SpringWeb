@@ -27,7 +27,7 @@ public class ResponsiveController {
 		return mv;
 	}
 
-	@RequestMapping(value = "/andoridMain")
+	@RequestMapping(value = "/androidMain")
 	public ModelAndView androidMain() {
 		ModelAndView mv = new ModelAndView("jsonView");
 		mv.setViewName("androidMain.responsive");

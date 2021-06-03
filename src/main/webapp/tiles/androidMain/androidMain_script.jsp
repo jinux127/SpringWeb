@@ -3,9 +3,11 @@
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 <script>
 
-
+var i = 1;
 function btn_retrofit1() {
-	alert("버튼 테스트");
+	++i;
+	$("#btn1").val('Retrofit'+i);
+	Android.showToast("눌리나");
 }
 
 /* 
