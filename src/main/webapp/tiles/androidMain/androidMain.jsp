@@ -9,11 +9,7 @@
 	<title>ResponsiveWeb</title>
 </head>
 <body>
-<<<<<<< HEAD
 <input type="button" onclick="btn_retrofit1()" value="Retrofit1" id="btn1">
-=======
-<input type="button" onclick="btn_retrofit1" value="Retrofit1">
->>>>>>> master
 
 </body>
 </html>
