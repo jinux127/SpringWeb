@@ -3,11 +3,17 @@
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 <script>
 
+<<<<<<< HEAD
 var i = 1;
 function btn_retrofit1() {
 	++i;
 	$("#btn1").val('Retrofit'+i);
 	Android.showToast("눌리나");
+=======
+
+function btn_retrofit1() {
+	alert("버튼 테스트");
+>>>>>>> master
 }
 
 /* 
