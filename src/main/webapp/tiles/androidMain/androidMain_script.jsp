@@ -26,7 +26,6 @@ function getAllList(){
 			var body = $("#boardTable > tbody");
 			body.empty;
 			var bodyHtml = "";
-			
 			$.each(data.data,function(index,val){
 				bodyHtml += "<tr>"+
 								"<td>" + val.no + "</td>" +
