@@ -7,6 +7,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<style type="text/css">
 		#main-menu,
+		#android-menu,
 		#sub-menu{
 			margin: 0;
 			padding: 0;
@@ -77,6 +78,16 @@
 	          	</ul>
 	          </li>
 	        </ul>
+			<br>
+			<ul id="android-menu">
+	          <li><a href="/responsive/androidMain">Android MENU</a>
+	          	<ul id="sub-menu">
+	          		<li><a href="/responsive/androidMain">Menu1</a></li>
+	          		<li><a href="#">Menu2</a></li>
+	          		<li><a href="#">Menu3</a></li>
+	          	</ul>
+	          </li>
+	        </ul>
         </div>
 		<div id="rs-content">
 			<tiles:insertAttribute name="content" />
@@ -90,6 +101,17 @@
 	
 	<script type="text/javascript" src="/static/plugins/jquery-3.5.1.min.js"></script>
 	<tiles:insertAttribute name="script" />
-
+	
+	<script type="text/javascript">
+	
+		$(document).ready(function(){
+			androidChk();
+		});
+		function androidChk() {
+			if (typeof Android == "undefined") {
+				$("ul").remove("#android-menu");
+			}
+		}
+	</script>
 </body>
 </html>
