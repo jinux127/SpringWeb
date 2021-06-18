@@ -1,15 +1,21 @@
 package com.jointree.responsive.controller;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.api.client.http.HttpRequest;
 import com.jointree.responsive.service.impl.BoardServiceImpl;
 
 @RestController
@@ -47,11 +53,25 @@ public class ResponsiveController {
 	 * Retrofit 통신 Ex
 	 */
 	@RequestMapping(value = "/retrofit.do")
-	public ModelAndView retrofitEx() throws Exception {	
-		System.out.println("호출됨");
-		ModelAndView mv = new ModelAndView("jsonView");
-		mv.setViewName("androidMain.responsive");
-		return mv;
+	public Map<String,Object> retrofitEx(@RequestBody String requestStringBody) throws Exception {	
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		Map<String, Object> testMap = new HashMap<String, Object>();
+		
+		System.out.println(requestStringBody);
+		
+		JSONObject json = (JSONObject) new JSONParser().parse(requestStringBody);
+		System.out.println(json.toJSONString());
+		
+		testMap.put("test1", "1");
+		testMap.put("test2", "2");
+		testMap.put("test3", "3");
+		
+		JSONObject json2 = new JSONObject(testMap);
+		
+		resultMap.put("id", "1");
+		resultMap.put("data", json2.toString());
+		System.out.println(json2.toString());
+		return resultMap;
 
 	}
 
