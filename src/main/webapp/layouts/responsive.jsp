@@ -83,7 +83,7 @@
 	          <li><a href="/responsive/androidMain">Android MENU</a>
 	          	<ul id="sub-menu">
 	          		<li><a href="/responsive/androidMain">Menu1</a></li>
-	          		<li><a href="#">Menu2</a></li>
+	          		<li><a href="javascript:callAndroidScanner('test');">Scanner</a></li>
 	          		<li><a href="#">Menu3</a></li>
 	          	</ul>
 	          </li>
@@ -109,8 +109,15 @@
 		});
 		function androidChk() {
 			if (typeof Android == "undefined") {
-				$("ul").remove("#android-menu");
+// 				$("ul").remove("#android-menu");
 			}
+		}
+		function callAndroidScanner(a){
+			if (typeof Android == "undefined") {
+    			console.log('Not Android');
+    		}else{
+    			Android.callScanner(a);
+    		}
 		}
 	</script>
 </body>
