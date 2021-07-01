@@ -84,7 +84,8 @@
 	          	<ul id="sub-menu">
 	          		<li><a href="/responsive/androidMain">Menu1</a></li>
 	          		<li><a href="javascript:callAndroidScanner('test');">Scanner</a></li>
-	          		<li><a href="#">Menu3</a></li>
+	          		<li><a href="javascript:getAndroidLocale('test');">getLocation</a></li>
+	          		<li><a href="javascript:callDialog();">dialog</a></li>
 	          	</ul>
 	          </li>
 	        </ul>
@@ -119,6 +120,21 @@
     			Android.callScanner(a);
     		}
 		}
+		function getAndroidLocale(a){
+			if (typeof Android == "undefined") {
+    			console.log('Not Android');
+    		}else{
+    			Android.getAndroidLocale(a);
+    		}
+		}
+		function callDialog(a){
+			if (typeof Android == "undefined") {
+    			console.log('Not Android');
+    		}else{
+    			Android.callDialog();
+    		}
+		}
+
 	</script>
 </body>
 </html>

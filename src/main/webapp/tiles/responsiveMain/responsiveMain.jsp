@@ -21,6 +21,8 @@
 			<tbody style="text-align: center;"></tbody>
 		</table>
 	</form>
-
+	<input type="text" id="country" readonly="readonly">
+	<input type="text" id="language" readonly="readonly">
+	<select id="LocaleSelect" name="LocaleSelect"></select>
 </body>
 </html>

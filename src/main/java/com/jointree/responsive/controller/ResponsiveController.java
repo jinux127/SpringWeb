@@ -4,19 +4,18 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.google.api.client.http.HttpRequest;
+import com.jointree.responsive.service.LocaleService;
 import com.jointree.responsive.service.impl.BoardServiceImpl;
+import com.jointree.responsive.service.impl.LocaleServiceImpl;
 
 @RestController
 @RequestMapping(value = "/responsive")
@@ -24,6 +23,8 @@ public class ResponsiveController {
 	
 	@Resource(name = "BoardService")
 	private BoardServiceImpl boardService;
+	@Resource(name = "LocaleService")
+	private LocaleServiceImpl localService;
 	
 	@RequestMapping(value = "/main")
 	public ModelAndView responsiveMain() {
@@ -73,6 +74,17 @@ public class ResponsiveController {
 		System.out.println(json2.toString());
 		return resultMap;
 
+	}
+	/* 2021.06.03
+	 * Retrofit 통신 Ex
+	 */
+	@RequestMapping(value = "/localeEx.do")
+	@ResponseBody
+	public ModelAndView localeEx(String country, String language) throws Exception {	
+		ModelAndView mv = new ModelAndView("jsonView");
+		mv.addObject("data", localService.getLocaleList(language));
+		return mv;
+		
 	}
 
 }

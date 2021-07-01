@@ -110,7 +110,7 @@ public class ReservationController {
 	
 	
 //	
-	@RequestMapping(value="/getProductInfo", method = RequestMethod.POST)
+	@RequestMapping(value="/getProductInfo.do", method = RequestMethod.POST)
 	@ResponseBody
 	public ModelAndView getProductInfo(String productSeq) throws Exception {
 		
